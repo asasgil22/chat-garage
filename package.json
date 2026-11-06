@@ -1,0 +1,20 @@
+{
+  "name": "chat-garage-promocao",
+  "version": "1.0.0",
+  "description": "Sistema de cadastro de adesivos Chat Garage",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "css": "npx @tailwindcss/cli -i ./public/css/input.css -o ./public/css/output.css --watch"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "tailwindcss": "^4.0.0"
+  }
+}

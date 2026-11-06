@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Login Admin - Chat Garage</title>
+  <link rel="icon" href="/img/logo.jpg" type="image/jpeg">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body {
+      background-color: #000000;
+      color: #f5f5f7;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      position: relative;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at 50% -20%, #1c1c1e 0%, #000000 70%);
+    }
+
+    .bg-garage-container { position: fixed; inset: 0; z-index: -1; }
+    .bg-garage-image {
+      position: absolute; inset: -10px;
+      background-image: url('/img/background1.jpg'), url('/img/background.jpg');
+      background-size: cover; background-position: center; filter: blur(8px); transform: scale(1.04);
+    }
+    .bg-garage-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.82); }
+
+    .main-wrapper { flex: 1; display: flex; align-items: center; justify-content: center; width: 100%; padding: 20px 0; }
+
+    .login-card {
+      background: rgba(28, 28, 30, 0.75); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+      border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 24px; width: 100%; max-width: 400px;
+      padding: 32px 24px; box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7); display: flex; flex-direction: column; align-items: center;
+    }
+
+    .login-header-logo {
+      width: 76px; height: 76px; border-radius: 50%; border: 3px solid #f59e0b;
+      object-fit: cover; margin-bottom: 14px; box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
+    }
+
+    .login-title { font-size: 18px; font-weight: 700; color: #ffffff; letter-spacing: -0.3px; margin-bottom: 4px; text-align: center; }
+    .login-subtitle { font-size: 12px; color: #86868b; margin-bottom: 20px; text-align: center; }
+
+    form { width: 100%; }
+    .field-group { margin-bottom: 14px; }
+    label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; color: #86868b; margin-bottom: 6px; letter-spacing: 0.5px; }
+    
+    input {
+      width: 100%; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px; padding: 12px 14px; color: #ffffff; font-size: 16px; outline: none;
+      transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    input:focus { border-color: #0a84ff; box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.2); }
+
+    .btn-submit {
+      width: 100%; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #000000;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 14px; border: none;
+      border-radius: 12px; font-size: 13px; cursor: pointer; margin-top: 6px;
+      transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 0 4px 18px rgba(217, 119, 6, 0.3);
+    }
+    .btn-submit:active { transform: scale(0.98); }
+
+    .error-box {
+      width: 100%; background: rgba(255, 69, 58, 0.15); border: 1px solid rgba(255, 69, 58, 0.3);
+      color: #ff453a; padding: 10px; border-radius: 10px; font-size: 12px; text-align: center; margin-bottom: 14px;
+    }
+
+    /* Rodapé Modernizado com Badge Pill */
+    footer { 
+      background: rgba(28, 28, 30, 0.65); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); 
+      border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 16px 20px; text-align: center; 
+      font-size: 12px; color: #86868b; width: 100%; position: relative; z-index: 10; 
+      display: flex; align-items: center; justify-content: center; gap: 6px; flex-wrap: wrap; line-height: 1.6;
+    }
+    
+    .dev-badge {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+      display: inline-flex;
+      align-items: center;
+    }
+    .dev-badge:hover {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: rgba(245, 158, 11, 0.4);
+      color: #f59e0b;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-garage-container">
+    <div class="bg-garage-image"></div>
+    <div class="bg-garage-overlay"></div>
+  </div>
+
+  <div class="main-wrapper">
+    <div class="login-card">
+      <img src="/img/logo.jpg" alt="Logo" class="login-header-logo" onerror="this.style.display='none'">
+
+      <div class="login-title">Área Administrativa</div>
+      <div class="login-subtitle">Informe suas credenciais para gerenciar a promoção</div>
+
+      <% if (erro) { %>
+        <div class="error-box"><%= erro %></div>
+      <% } %>
+
+      <form action="/admin/login" method="POST">
+        <div class="field-group">
+          <label>Usuário</label>
+          <input type="text" name="usuario" placeholder="Digite seu usuário" required autofocus>
+        </div>
+
+        <div class="field-group">
+          <label>Senha</label>
+          <input type="password" name="senha" placeholder="••••••••" required>
+        </div>
+
+        <button type="submit" class="btn-submit">Entrar no Painel</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    Chat Garage © 2026 — Criado e desenvolvido por 
+    <a href="https://www.curriculodosergio.com.br/" target="_blank" rel="noopener noreferrer" class="dev-badge">Sergio Gil</a> 
+    utilizando a tecnologia Node.js.
+  </footer>
+
+</body>
+</html>
